@@ -2,6 +2,7 @@ import Button from "../../components/Button";
 import { Link, Route, Routes } from "react-router-dom";
 import { AppRoutes } from "../../common/routes";
 import CustomRoute from "../../components/CustomROute/CustomRoute";
+import { Outlet } from "react-router-dom";
 
 const Ihor = () => {
     console.log("ihor")
@@ -14,10 +15,7 @@ const Ihor = () => {
             <span>Ihors changes</span>
             <Button title='Click me' handleClick={handleButtonClick}/>
             <Link to={AppRoutes.ihor + AppRoutes.friends}>go to friends</Link>
-            <Routes>
-                <Route path={AppRoutes.friends} element={<h1>Ihors friends</h1>}/>
-                <Route path={AppRoutes.custom} element={<CustomRoute />}/>
-            </Routes>
+            <Outlet />
         </div>
     )
 };

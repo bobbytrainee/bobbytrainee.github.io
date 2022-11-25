@@ -3,7 +3,9 @@ export const AppRoutes = {
     bobby: "/bobby",
     ihor: "/ihor",
     friends: "/friends",
-    custom: "/:userId"
+    custom: "/:userId",
+    notFound: "/404",
+    noPerm: "/denied"
 }
 
 export const NestedRoutes = {
