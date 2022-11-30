@@ -11,6 +11,7 @@ import { PublicRouteHOC } from "./common/routesHOC/PublicRoute";
 import NoPerm from "./pages/noPermissions/NOPermissions";
 import { AdminRouteHOC } from "./common/routesHOC/AdminRoute";
 import CustomRoute from "./components/CustomROute/CustomRoute";
+import { HOC } from "./pages/HOC page/HOC_view_HOC";
 
 function App() {
 
@@ -20,6 +21,7 @@ function App() {
             <Routes>
                 <Route path={AppRoutes.main} element={<Main/>}/>
                 <Route path={AppRoutes.noPerm} element={<NoPerm/>}/>
+                <Route path={AppRoutes.HOC} element={HOC()}/>
 
                 <Route path={NestedRoutes.bobby} element={
                     <PublicRouteHOC Component={Bobby}/>

@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 const CustomRoute = ()=>{
 const { userId } = useParams()
 const params = useParams()
-    const [data, setData] = useState([])
+const [data, setData] = useState([])
 
 
 useEffect(()=>{
