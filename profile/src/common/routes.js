@@ -6,7 +6,8 @@ export const AppRoutes = {
     custom: "/:userId",
     notFound: "/404",
     noPerm: "/denied",
-    HOC: "/hoc"
+    HOC: "/hoc",
+    FORM:'/form',
 }
 
 export const NestedRoutes = {
