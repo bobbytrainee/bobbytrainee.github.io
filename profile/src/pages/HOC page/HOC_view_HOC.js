@@ -2,9 +2,11 @@ import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import HOCview from "./HOC_view";
 import { CharacterAPI, LocationsAPI } from "../../api/api";
+import { rickMortyActions } from "../../redux/actions/rickMortyActions";
+import { useDispatch } from "react-redux";
 
 const HOCComponentWithState = ({Component}) => {
-    const [ data, setData ] = useState([])
+    const dispatch = useDispatch();
     const [ userData, setUserData ] = useState([])
     const [ counter, setCounter ] = useState(5)
     const {REACT_APP_RICK_MORTY} = process.env
@@ -16,38 +18,30 @@ const HOCComponentWithState = ({Component}) => {
         role: 'student'
     }
     useEffect(() => {
+
         CharacterAPI.getCharacters("12345")
             .then((fetchData) => {
-                setData(fetchData.data.results)
+                dispatch(rickMortyActions.addCharacters(fetchData.data.results))
+                dispatch(rickMortyActions.addInfo(fetchData.data.info))
                 const arr = fetchData?.data.results?.map((item, index) => index < counter && item)
+                console.log(arr)
                 setUserData(arr)
             })
 
-        LocationsAPI.getCharacters()
-            .then(res => console.log(res.data))
-            .catch(e => console.log(e.message))
-
-        // fetch(`https://rickandmortyapi.com/api/character`, {
-        //     method: 'GET',
-        //     // body: JSON.stringify(user)
-        // })
-        //     .then((res) => res.json())
-        //     .then((fetchData) => {
-        //         setData(fetchData.results)
-        //         const arr = fetchData.results.map((item, index) => index < counter && item)
-        //         setUserData(arr)
-        //     })
+        // LocationsAPI.getCharacters()
+        //     .then(res => console.log(res.data))
+        //     .catch(e => console.log(e.message))
+        //
     }, [])
 
-    useEffect(() => {
-        const arr = data?.map((item, index) => index < counter && item)
-        console.log(arr)
-        setUserData(arr)
-    }, [ counter ])
+    // useEffect(() => {
+    //     const arr = data?.map((item, index) => index < counter && item)
+    //     console.log(arr)
+    //     setUserData(arr)
+    // }, [ counter ])
 
     return (
         <Component
-            data={userData}
             counter={counter}
             setCounter={setCounter}
         />

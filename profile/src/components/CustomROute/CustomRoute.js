@@ -6,7 +6,7 @@ const { userId } = useParams()
 const params = useParams()
 const [data, setData] = useState([])
 
-
+    console.log("custom")
 useEffect(()=>{
     //API call
     console.log(userId)
