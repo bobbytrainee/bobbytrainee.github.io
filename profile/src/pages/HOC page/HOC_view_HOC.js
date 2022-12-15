@@ -2,50 +2,38 @@ import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import HOCview from "./HOC_view";
 import { CharacterAPI, LocationsAPI } from "../../api/api";
-import { rickMortyActions } from "../../redux/actions/rickMortyActions";
-import { useDispatch } from "react-redux";
+import { getCharactersThunk, rickMortyActions } from "../../redux/actions/rickMortyActions";
+import { useDispatch, useSelector } from "react-redux";
+import { logDOM } from "@testing-library/react";
+import useGetDataHook from "../../components/customHook/useGetDataHook";
 
-const HOCComponentWithState = ({Component}) => {
+const HOCComponent = ({Component}) => {
     const dispatch = useDispatch();
-    const [ userData, setUserData ] = useState([])
     const [ counter, setCounter ] = useState(5)
+    const [ needGetData, setNeedGetData] = useState(false)
+    const [specifData, setSpecData] = useState([])
     const {REACT_APP_RICK_MORTY} = process.env
     const obj = process.env
-
-    console.log('REACT_APP_RICK_MORTY',obj)
-    const user = {
-        name: 'bobby',
-        role: 'student'
+    const getCharacters = (a, someFunc) => dispatch(getCharactersThunk(a, someFunc))
+    const data = useSelector(store => store.rickMorty.characters)
+    const checkTODO = ()=>{
+            alert('HE')
+        console.log('SUCCESS')
     }
+
+    useGetDataHook(needGetData, getCharacters, checkTODO, setSpecData);
     useEffect(() => {
-
-        CharacterAPI.getCharacters("12345")
-            .then((fetchData) => {
-                dispatch(rickMortyActions.addCharacters(fetchData.data.results))
-                dispatch(rickMortyActions.addInfo(fetchData.data.info))
-                const arr = fetchData?.data.results?.map((item, index) => index < counter && item)
-                console.log(arr)
-                setUserData(arr)
-            })
-
-        // LocationsAPI.getCharacters()
-        //     .then(res => console.log(res.data))
-        //     .catch(e => console.log(e.message))
-        //
+        setTimeout(()=> setNeedGetData(true), 5000)
     }, [])
 
-    // useEffect(() => {
-    //     const arr = data?.map((item, index) => index < counter && item)
-    //     console.log(arr)
-    //     setUserData(arr)
-    // }, [ counter ])
 
     return (
         <Component
             counter={counter}
             setCounter={setCounter}
+            data={data}
         />
     )
 }
 
-export const HOC = () => <HOCComponentWithState Component={HOCview}/>;
+export const HOC = () => <HOCComponent Component={HOCview}/>;

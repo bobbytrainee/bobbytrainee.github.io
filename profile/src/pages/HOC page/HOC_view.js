@@ -1,12 +1,8 @@
 import First from "./First";
 import Second from "./Second";
-import { useState } from "react";
 import { useSelector } from "react-redux";
-import store from "../../redux/store";
 
-const HOCview = ({counter, setCounter}) => {
-const data = useSelector(store => store.rickMorty.characters)
-    return (
+const HOCview = ({counter, setCounter, data}) => (
         <>
             <First counter={counter} setCounter={setCounter}/>
             <Second counter={counter} setCounter={setCounter}/>
@@ -19,6 +15,6 @@ const data = useSelector(store => store.rickMorty.characters)
                 ))}
         </>
     )
-}
+
 
 export default HOCview

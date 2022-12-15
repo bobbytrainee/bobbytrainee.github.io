@@ -1,3 +1,6 @@
+import { useDispatch } from "react-redux";
+import { CharacterAPI } from "../../api/api";
+
 export const ActionTypes = {
     SET_CHARACTERS: 'SET_CHARACTERS',
     SET_INFO: 'SET_CHARACTERS_INFO',
@@ -10,6 +13,18 @@ export const rickMortyActions = {
     setError:(error)=>({type: ActionTypes.SET_ERROR, error})
 }
 
-// rickMortyActions.addCharacters([])
-// rickMortyActions.addInfo({})
+
+export const getCharactersThunk = (a, someFunc) => async (dispatch)=> {
+    await CharacterAPI.getCharacters("12345")
+        .then((fetchData) => {
+            console.log('THEN')
+            dispatch(rickMortyActions.addCharacters(fetchData.data.results))
+            dispatch(rickMortyActions.addInfo(fetchData.data.info))
+            someFunc()
+        })
+        .catch(e=>{
+        })
+    console.log(a)
+
+}
 

@@ -1,11 +1,11 @@
-import { combineReducers, createStore } from 'redux';
+import { applyMiddleware, combineReducers, createStore } from 'redux';
 import {composeWithDevToolsDevelopmentOnly} from '@redux-devtools/extension';
 import rickMortyReducer from "./reducers/rickMortyReducer";
+import thunk from 'redux-thunk';
 
 const rootReducer = combineReducers({
     rickMorty: rickMortyReducer,
-    // users: usersReducer,
-    // messages: messagesReducer,
+
 })
 
 const composeEnhancers = composeWithDevToolsDevelopmentOnly({
@@ -15,7 +15,7 @@ const composeEnhancers = composeWithDevToolsDevelopmentOnly({
 
 const store = createStore(
     rootReducer,
-    composeEnhancers()
+    composeEnhancers(applyMiddleware(thunk))
 );
 
 
