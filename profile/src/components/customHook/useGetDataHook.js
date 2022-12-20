@@ -1,14 +1,9 @@
 import { useEffect } from "react";
 
-function useGetDataHook(a, b, c, d){
+function useGetDataHook(needGetData, getCharacters){
     useEffect(()=>{
-        a && getData()
-    },[a])
-
-    const getData = ()=>{
-        b('hello', c)
-        d([1,2,3])
-    }
+        needGetData && getCharacters()
+    },[needGetData])
 
 }
 export default useGetDataHook;

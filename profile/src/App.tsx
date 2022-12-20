@@ -1,6 +1,4 @@
-import logo from './logo.svg';
 import './App.css';
-import Button from "./components/Button";
 import Ihor from "./pages/Ihor/Ihor";
 import Bobby from "./pages/Bobby/Bobby";
 import Header from "./components/Header/Header";
@@ -16,7 +14,7 @@ import Form from "./pages/Form/Form";
 
 
 function App() {
-    console.log('App render')
+
     return (
         <div>
             <Header/>

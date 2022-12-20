@@ -1,17 +1,27 @@
 import { ActionTypes } from "../actions/rickMortyActions";
+import {RMReducerActionTypes} from "../../common/types";
 
-const initialState = {
+interface initialStateType{
+    characters: [],
+    error: null,
+    isLoading: boolean,
+    info:{},
+}
+
+
+const initialState: initialStateType = {
     characters: [],
     error: null,
     isLoading: false,
     info:{},
 }
-const rickMortyReducer = (state=initialState, action) => {
+
+const rickMortyReducer = (state=initialState, action: RMReducerActionTypes) => {
 switch(action.type){
     case ActionTypes.SET_CHARACTERS:{
         return {
             ...state,
-            characters: action.characters
+            characters: action?.characters
         }
     }
     case ActionTypes.SET_INFO:{

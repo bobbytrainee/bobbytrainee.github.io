@@ -8,6 +8,11 @@ const rootReducer = combineReducers({
 
 })
 
+export type AppStateType = ReturnType<typeof store.getState>;
+export type PropertiesTypes<T> = T extends { [key: string]: infer U }
+    ? U
+    : never;
+
 const composeEnhancers = composeWithDevToolsDevelopmentOnly({
     trace: true,
     traceLimit: 25,
@@ -19,4 +24,4 @@ const store = createStore(
 );
 
 
-export default store
+export default store;
