@@ -11,3 +11,12 @@ export const signOutUser = async (callback) => {
         console.log(e);
     }
 }
+
+export const setFormData = (value, key, callback) => {
+    callback((prevState) => {
+        return {
+            ...prevState,
+            [key]: value,
+        }
+    })
+}
