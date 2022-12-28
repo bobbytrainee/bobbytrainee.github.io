@@ -9,9 +9,15 @@ import {collection, addDoc, onSnapshot, doc, setDoc, deleteDoc} from "firebase/f
 import db from "../../firebase/firebase"
 const Main = () => {
     const [users, setUsers] = useState([])
+    const [editId, setEditID] = useState('')
+    const [editFormValues, setEditFormValues] = useState({})
     useEffect(()=>{
         getMyCVdata()
     },[])
+
+    useEffect(()=>{
+        editId !== '' && setEditFormValues(users.filter(user=> user.id === editId)[0])
+    },[editId])
 
     const getMyCVdata = () => {
         console.log("Getting data")
@@ -34,10 +40,7 @@ const Main = () => {
 
     const EditUser = async (user) => {
         const docRef = doc(db,"cv",  user.id)
-        await setDoc(docRef, {
-            ...user,
-            role: Math.random().toFixed(2)
-        })
+        await setDoc(docRef, editFormValues)
     }
 
 
@@ -130,13 +133,19 @@ const Main = () => {
             <h1>Main</h1>
             <button onClick={handleAddUSer}>Add USer</button>
             {users && users.map((user) => (
-                <div key={user?.id}>
+                editId !== user?.id
+                    ? (<div key={user?.id}>
                     <p>{user?.firstName}</p>
                     <p>{user?.role}</p>
                     <button onClick={()=> handleDeleteUser(user?.id)}>Delete</button>
-                    <button onClick={()=> EditUser(user)}>Edit</button>
-                </div>
+                    <button onClick={()=> setEditID(user?.id)}>Edit</button>
+                    </div>)
+                    : (<div key={user?.id}>
+                        <input value={editFormValues?.firstName}></input>
+                        <input value={editFormValues?.role} onChange={}></input>
+                    </div>)
             ))}
+
 
             {/*<button onClick={setAdmin}>*/}
             {/*    set as Admin*/}
