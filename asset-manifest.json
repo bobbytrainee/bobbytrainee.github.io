@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/bobbytrainee.github.io/static/css/main.039e794d.css",
+    "main.js": "/bobbytrainee.github.io/static/js/main.f4eaa48f.js",
+    "static/js/787.f2a0fa2f.chunk.js": "/bobbytrainee.github.io/static/js/787.f2a0fa2f.chunk.js",
+    "index.html": "/bobbytrainee.github.io/index.html",
+    "main.039e794d.css.map": "/bobbytrainee.github.io/static/css/main.039e794d.css.map",
+    "main.f4eaa48f.js.map": "/bobbytrainee.github.io/static/js/main.f4eaa48f.js.map",
+    "787.f2a0fa2f.chunk.js.map": "/bobbytrainee.github.io/static/js/787.f2a0fa2f.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.039e794d.css",
+    "static/js/main.f4eaa48f.js"
+  ]
+}
